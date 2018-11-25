@@ -1,6 +1,2 @@
-﻿  Game.cpp
-  GameObject.cpp
-  TextureManager.cpp
-  main.cpp
-  Generating Code...
+﻿  Map.cpp
   SDL-Game.vcxproj -> D:\Simple-Games\SDL-Game\Debug\SDL-Game.exe

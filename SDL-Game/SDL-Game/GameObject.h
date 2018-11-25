@@ -14,10 +14,9 @@ protected:
 	SDL_Texture* texture;
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
-	SDL_Renderer* renderer;
 
 public:
-	GameObject(const char* textureLocation, SDL_Renderer* renderer,int x, int y);
+	GameObject(const char* textureLocation,int x, int y);
 
 	virtual void render();
 	virtual void update();

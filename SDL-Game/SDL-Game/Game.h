@@ -6,6 +6,7 @@
 
 #include "TextureManager.h"
 #include "GameObject.h"
+#include "Map.h"
 
 typedef SDL_Window Window;
 typedef SDL_Renderer Renderer;
@@ -15,8 +16,10 @@ class Game
 {
 	bool isRunning;
 	Window* window;
-	Renderer* renderer;
 public:
+
+	static SDL_Renderer* renderer;
+
 	Game();
 
 	void init(const char* title, int xpos, int ypos, int width, int height,bool isFullscreen);

@@ -1,8 +1,12 @@
 #include "Game.h"
+#include "Map.h"
 
 GameObject* player;
+Map* map;
 
-Game::Game() : isRunning(true), window(nullptr),renderer(nullptr){}
+SDL_Renderer* Game::renderer = nullptr;
+
+Game::Game() : isRunning(true), window(nullptr){}
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool isFullscreen)
 {
@@ -21,14 +25,14 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 		if(this->renderer)
 		{
-			SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
+			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 			std::cout << "Renderer created successfully!" << std::endl;
 		}
 
 		this->isRunning = true;
 		
-		player = new GameObject("assets\\player.png",this->renderer,0,0);
-
+		player = new GameObject("assets\\player.png", 0, 0);
+		map = new Map();
 
 	}else
 	{
@@ -60,6 +64,7 @@ void Game::update()
 void Game::render()
 {
 	SDL_RenderClear(this->renderer);
+	map->drawMap();
 	player->render();
 	SDL_RenderPresent(this->renderer);
 }
@@ -76,6 +81,8 @@ void Game::clean()
 	SDL_Quit();
 	delete player;
 	player = nullptr;
+	delete map;
+	map = nullptr;
 	std::cout << "Game cleaned successfully!" << std::endl;
 }
 

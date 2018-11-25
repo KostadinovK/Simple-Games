@@ -1,9 +1,9 @@
 #include "GameObject.h"
 
-GameObject::GameObject(const char* textureLocation, SDL_Renderer* renderer,int x,int y) : xpos(x),ypos(y),renderer(renderer)
+GameObject::GameObject(const char* textureLocation,int x,int y) : xpos(x),ypos(y)
 {
 	
-	this->texture = TextureManager::loadTexture(textureLocation, this->renderer);
+	this->texture = TextureManager::loadTexture(textureLocation);
 
 	this->srcRect.x = 0;
 	this->srcRect.y = 0;
@@ -18,7 +18,7 @@ GameObject::GameObject(const char* textureLocation, SDL_Renderer* renderer,int x
 
 void GameObject::render()
 {
-	SDL_RenderCopy(this->renderer, this->texture, &srcRect, &destRect);
+	TextureManager::draw(this->texture,srcRect,destRect);
 }
 
 void GameObject::update()
