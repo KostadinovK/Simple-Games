@@ -1,5 +1,7 @@
 #include "Game.h"
 
+GameObject* player;
+
 Game::Game() : isRunning(true), window(nullptr),renderer(nullptr){}
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool isFullscreen)
@@ -24,12 +26,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		}
 
 		this->isRunning = true;
-		// To extract in a separate class
-		SDL_Surface* tmpSurface = IMG_Load("assets\\player.png");
-		this->player = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-		SDL_FreeSurface(tmpSurface);
+		
+		player = new GameObject("assets\\player.png",this->renderer,0,0);
 
-		this->counter = 1;
 
 	}else
 	{
@@ -55,17 +54,13 @@ void Game::handleEvent()
 
 void Game::update()
 {
-	this->desRec.h = 64;
-	this->desRec.w = 64;
-	this->desRec.x = this->counter;
-	this->counter++;
-	
+	player->update();
 }
 
 void Game::render()
 {
 	SDL_RenderClear(this->renderer);
-	SDL_RenderCopy(renderer, player, NULL, &desRec);
+	player->render();
 	SDL_RenderPresent(this->renderer);
 }
 
@@ -79,7 +74,8 @@ void Game::clean()
 	SDL_DestroyWindow(this->window);
 	SDL_DestroyRenderer(this->renderer);
 	SDL_Quit();
-
+	delete player;
+	player = nullptr;
 	std::cout << "Game cleaned successfully!" << std::endl;
 }
 

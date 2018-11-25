@@ -4,6 +4,9 @@
 #include <string>
 #include <iostream>
 
+#include "TextureManager.h"
+#include "GameObject.h"
+
 typedef SDL_Window Window;
 typedef SDL_Renderer Renderer;
 
@@ -13,11 +16,6 @@ class Game
 	bool isRunning;
 	Window* window;
 	Renderer* renderer;
-	SDL_Texture* player;
-	SDL_Rect srcRec;
-	SDL_Rect desRec;
-	long counter;
-
 public:
 	Game();
 
